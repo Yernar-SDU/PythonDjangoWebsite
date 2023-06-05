@@ -37,7 +37,7 @@ class Item(models.Model):
 
     description = models.TextField(max_length=100000, default='asdff')
 
-    price = models.CharField(max_length=100, default='10000T')
+    price = models.IntegerField(default='10000')
 
     image = models.ImageField(upload_to='img/', verbose_name='My Photo', default='iherbItems/img/banner/banner-1.jpg')
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -12,15 +13,15 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+     <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'iherbItems/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/style.css' %}" type="text/css">
 </head>
 
 <body>
@@ -220,24 +221,6 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Blog</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Blog</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
 
     <!-- Blog Section Begin -->
     <section class="blog spad">
@@ -494,14 +477,14 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{% static 'iherbItems/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'iherbItems/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/main.js' %}"></script>
 
 
 

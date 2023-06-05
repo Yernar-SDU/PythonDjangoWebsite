@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import UserRegistrationForm, ItemDetailsChangeForm
+from .forms import UserRegistrationForm, ItemDetailsChangeForm, ItemCreateForm
 from .models import Item
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -70,13 +70,12 @@ def item_details_admin(request, item_id):
     return render(request, 'ogani-master/admin-details.html', {'item': item, 'form': form})
 
 
-
 def new_item_admin(request):
-    form = ItemDetailsChangeForm()
+    form = ItemCreateForm()
     if request.method == 'POST':
-        form = ItemDetailsChangeForm(request.POST, request.FILES)
+        form = ItemCreateForm(request.POST, request.FILES)
         if form.is_valid():
-            item = Item.objects.get(id=item_id)
+            item = Item()
             item.title = form.cleaned_data['title']
             item.factory = form.cleaned_data['factory']
             item.weight = form.cleaned_data['weight']
@@ -86,6 +85,9 @@ def new_item_admin(request):
             item.category = form.cleaned_data['category']
             item.description = form.cleaned_data['description']
             item.price = form.cleaned_data['price']
+            item.available_date = form.cleaned_data['available_date']
+            item.expiration_date = form.cleaned_data['expiration_date']
+            item.size = form.cleaned_data['size']
             if 'image' in form.changed_data:
                 item.image = form.cleaned_data['image']
             item.save()
@@ -93,7 +95,7 @@ def new_item_admin(request):
             return render(request, 'ogani-master/admin.html', context={'items': items})
         else:
             messages.error(request, "Invalid username or password.")
-    return render(request, 'ogani-master/admin-details.html', {'item': item, 'form': form})
+    return render(request, 'ogani-master/admin-details.html', context={'form': form})
 
 
 def remove_item_admin(request, item_id):
@@ -152,3 +154,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def shop(request):
+    return render(request, 'ogani-master/blog.html')
