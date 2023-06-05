@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -13,14 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'iherbItems/css/style.css' %}" type="text/css">
 </head>
 
 <body>
@@ -29,7 +30,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Humberger Begin -->
+    <!-- Hamburger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
@@ -58,7 +59,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -136,7 +137,7 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li class="active"><a href="./shop-grid.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
@@ -222,22 +223,22 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Vegetable’s Package</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <a href="./index.html">Vegetables</a>
-                            <span>Vegetable’s Package</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!--    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-12 text-center">-->
+<!--                    <div class="breadcrumb__text">-->
+<!--                        <h2>Vegetable’s Package</h2>-->
+<!--                        <div class="breadcrumb__option">-->
+<!--&lt;!&ndash;                            <a href="/">Home</a>&ndash;&gt;-->
+<!--                            <a href="./index.html">Vegetables</a>-->
+<!--                            <span>Vegetable’s Package</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
     <!-- Breadcrumb Section End -->
 
     <!-- Product Details Section Begin -->
@@ -248,7 +249,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="img/product/details/product-details-1.jpg" alt="">
+                                src="{{item.image.url}}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -264,7 +265,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>Vetgetable’s Package</h3>
+                        <h3>{{ item.title }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -273,10 +274,8 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">$50.00</div>
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                            vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                        <div class="product__details__price">{{item.price}}</div>
+                        <p>{{item.description}}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -287,9 +286,9 @@
                         <a href="#" class="primary-btn">ADD TO CARD</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                            <li><b>Category</b> <span>{{item.category}}</span></li>
+                            <li><b>Size</b> <span>{{item.size}}</span></li>
+                            <li><b>Weight</b> <span>{{item.weight}} grams</span></li>
                             <li><b>Share on</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -530,15 +529,16 @@
     </footer>
     <!-- Footer Section End -->
 
+
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{% static 'iherbItems/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'iherbItems/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'iherbItems/js/main.js' %}"></script>
 
 
 </body>

@@ -1,8 +1,6 @@
 from django.db import models
 
 
-# import utils
-
 # Create your models here.
 class Item(models.Model):
     """A published book."""
@@ -45,3 +43,14 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class User(models.Model):
+    username = models.CharField(
+        max_length=255,
+        help_text="Username"
+    )
+    password = models.CharField(
+        max_length=255,
+        help_text="Username"
+    )

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 {% load static %}
-
+{% load crispy_forms_tags %}
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -38,7 +38,7 @@
     <div class="container">
         <div class="section-title">
             <h2>iHerb</h2>
-            <p style="margin-top:30px">Trusted brands. Healthy rewards.</p>
+            <p style="margin-top:30px">Register</p>
         </div>
         <div class="row justify-content-center">
             <form method="post" action="">
@@ -48,37 +48,16 @@
                         <label class="form-label" for="name">{{ field.label }}</label>
                         <br>
                         {{field}}
-                    </div>
 
+                    </div>
+                        {% for error in field.errors %}
+                            <small style="color: red;">{{ error }}</small> <br>
+                        {% endfor %}
                 {% endfor %}
+                <!-- Submit button -->
+                <button style="margin-top: 20px;" type="submit" class="btn btn-primary btn-block mb-4">Register</button>
 
-                {% if error %}
-                    <small style="color: red;">Incorrect username or password</small> <br>
-                {% endif %}
-                    <!-- Submit button -->
-                    <button style="margin-top: 20px;" type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-                    <!-- Register buttons -->
-                    <div class="text-center">
-                        <p>Not a member? <a href="/register">Register</a></p>
-                        <p>or sign up with:</p>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-google"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-github"></i>
-                        </button>
-                    </div>
-                </form>
+            </form>
 
 
             <div class="categories__slider owl-carousel">
