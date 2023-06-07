@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django import template
 from .forms import UserRegistrationForm, ItemDetailsChangeForm, ItemCreateForm
 from .models import Item
 from django.contrib.auth import authenticate, login, logout
@@ -155,5 +155,9 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
+
 def shop(request):
-    return render(request, 'ogani-master/blog.html')
+    items = Item.objects.all()
+    category = request.GET.get('category')
+    print(category)
+    return render(request, 'ogani-master/blog.html', context={'items': items, 'category': category})
