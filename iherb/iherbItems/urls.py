@@ -21,6 +21,7 @@ urlpatterns = [
 
     # shop
     path('shop/', views.shop, name='shop'),
+    path('shop/search', views.shop, name='item_search'),
 
     # path('login/', auth_views.LoginView.as_view(template_name='ogani-master/login.html'), name='login'),
     # path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),

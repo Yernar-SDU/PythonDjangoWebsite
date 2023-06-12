@@ -1,3 +1,6 @@
+import json
+
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 
 
@@ -54,3 +57,25 @@ class User(models.Model):
         max_length=255,
         help_text="Username"
     )
+
+
+class ItemEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Item):
+            # Convert the Item object to a dictionary with all the field values
+            return {
+                'title': obj.title,
+                'factory': obj.factory,
+                'expiration_date': obj.expiration_date,
+                'available_date': obj.available_date,
+                'weight': obj.weight,
+                'codeNumber': obj.codeNumber,
+                'upcNumber': obj.upcNumber,
+                'quantity': obj.quantity,
+                'size': obj.size,
+                'category': obj.category,
+                'description': obj.description,
+                'price': obj.price,
+                'image': obj.image.url if obj.image else None,
+            }
+        return super().default(obj)

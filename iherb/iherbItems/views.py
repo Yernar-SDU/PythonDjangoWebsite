@@ -1,17 +1,20 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from django import template
-from .forms import UserRegistrationForm, ItemDetailsChangeForm, ItemCreateForm
-from .models import Item
+from .forms import UserRegistrationForm, ItemDetailsChangeForm, ItemCreateForm, ItemSearchForm
+from .models import Item, ItemEncoder
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core import serializers
+
+from .utils import FixedSizeStack, RECENT_VIEWED_ITEMS_QUEUE, DjangoModelEncoder, default_items
 
 
 # @login_required(login_url="/login")
 def home_page(request):
     items = Item.objects.all()
-
     return render(request, 'ogani-master/index.html', context={'items': items})
 
 
@@ -23,11 +26,21 @@ def admin_view(request):
 
 def item_details(request, item_id):
     item = Item.objects.get(id=item_id)
+
+    if request.user.is_authenticated:
+        queue = request.session.get(RECENT_VIEWED_ITEMS_QUEUE, [])
+        if len(queue) == 3:
+            queue.pop(0)
+            queue.append(item.pk)
+        else:
+            queue.append(item.pk)
+        request.session[RECENT_VIEWED_ITEMS_QUEUE] = queue
+        request.session.save()
+
     return render(request, 'ogani-master/item-details.html', context={"item": item})
 
 
 def item_details_admin(request, item_id):
-    print("item_details_admin_run")
     form = ItemDetailsChangeForm()
     if request.method == 'POST':
         form = ItemDetailsChangeForm(request.POST, request.FILES)
@@ -158,6 +171,19 @@ def logout_view(request):
 
 def shop(request):
     items = Item.objects.all()
+    searchForm = ItemSearchForm(request.GET)
+    searchQuery = searchForm['search_query'].value()
+    stack = request.session[RECENT_VIEWED_ITEMS_QUEUE]
+
+    recentItems = []
+
+    for pk in stack:
+        item = Item.objects.get(id=pk)
+        recentItems.append(item)
+    if searchQuery:
+        items = Item.objects.filter(title__icontains=searchQuery)
+
+
     category = request.GET.get('category')
-    print(category)
-    return render(request, 'ogani-master/blog.html', context={'items': items, 'category': category})
+    return render(request, 'ogani-master/shop.html',
+                  context={'items': items, 'category': category, 'searchForm': searchForm, 'recentItems': recentItems[::-1]})
