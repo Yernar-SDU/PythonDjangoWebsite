@@ -1,6 +1,7 @@
 import json
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, ItemDetailsChangeForm, ItemCreateForm, ItemSearchForm
@@ -12,12 +13,17 @@ from django.core import serializers
 from .utils import FixedSizeStack, RECENT_VIEWED_ITEMS_QUEUE, DjangoModelEncoder, default_items
 
 
-# @login_required(login_url="/login")
+def user_is_admin(user):
+    return user.is_superuser
+
+@login_required(login_url="/login")
 def home_page(request):
+
     items = Item.objects.all()
     return render(request, 'ogani-master/index.html', context={'items': items})
 
-
+@user_passes_test(user_is_admin, login_url='/login')
+@staff_member_required
 def admin_view(request):
     items = Item.objects.all()
     print(items)
@@ -173,13 +179,14 @@ def shop(request):
     items = Item.objects.all()
     searchForm = ItemSearchForm(request.GET)
     searchQuery = searchForm['search_query'].value()
-    stack = request.session[RECENT_VIEWED_ITEMS_QUEUE]
-
     recentItems = []
+    if request.user.is_authenticated:
+        queue = request.session.get(RECENT_VIEWED_ITEMS_QUEUE, [])
+        for pk in queue:
+            item = Item.objects.get(id=pk)
+            recentItems.append(item)
 
-    for pk in stack:
-        item = Item.objects.get(id=pk)
-        recentItems.append(item)
+
     if searchQuery:
         items = Item.objects.filter(title__icontains=searchQuery)
 
@@ -187,3 +194,4 @@ def shop(request):
     category = request.GET.get('category')
     return render(request, 'ogani-master/shop.html',
                   context={'items': items, 'category': category, 'searchForm': searchForm, 'recentItems': recentItems[::-1]})
+

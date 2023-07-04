@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+{% load custom_filters  %}
 
 <head>
     <meta charset="UTF-8">
@@ -181,11 +182,11 @@
 <!--</section>-->
 <!-- Hero Section End -->
 
-<!-- Recommended Section Begin -->
+<!-- All Section Begin -->
 <section class="categories">
     <div class="container">
         <div class="section-title">
-            <h2>Рекомендовано для вас</h2>
+            <h2>All</h2>
         </div>
         <div class="row">
             <div class="categories__slider owl-carousel">
@@ -204,126 +205,84 @@
         </div>
     </div>
 </section>
+<!-- All Section End -->
+
+
+<!-- Bestseller Section Begin -->
+<section class="categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>Bestsellers</h2>
+        </div>
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                {% for item in items|categoryBestseller %}
+                        <div  class="col-lg-2">
+                            <a href="{% url 'item_details' item_id=item.id %}">
+                                <div class="categories__item set-bg" data-setbg="{{ item.image.url }}">
+                                </div>
+                                <p>{{item.title}}</p>
+                                <p style="color: black;"><span>₸</span>{{item.price}}</p>
+                            </a>
+                        </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Bestseller Section End -->
+
+
+<!-- New Section Begin -->
+<section class="categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>New</h2>
+        </div>
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                {% for item in items|categoryNew %}
+                        <div  class="col-lg-2">
+                            <a href="{% url 'item_details' item_id=item.id %}">
+                                <div class="categories__item set-bg" data-setbg="{{ item.image.url }}">
+                                </div>
+                                <p>{{item.title}}</p>
+                                <p style="color: black;"><span>₸</span>{{item.price}}</p>
+                            </a>
+                        </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- New Section End -->
+
+<!-- Recommended Section Begin -->
+<section class="categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>Recommended</h2>
+        </div>
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                {% for item in items|categoryRecommended %}
+                        <div  class="col-lg-2">
+                            <a href="{% url 'item_details' item_id=item.id %}">
+                                <div class="categories__item set-bg" data-setbg="{{ item.image.url }}">
+                                </div>
+                                <p>{{item.title}}</p>
+                                <p style="color: black;"><span>₸</span>{{item.price}}</p>
+                            </a>
+                        </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</section>
 <!-- Recommended Section End -->
-
-
-<!-- Special Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="section-title">
-            <h2>Специальные предложения для вас</h2>
-        </div>
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-1.jpg">
-                        <h5><a href="#">Fresh Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-2.jpg">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-3.jpg">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-4.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-5.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Special Section End -->
-
-
-<!-- Trend Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="section-title">
-            <h2>Сегодня в трендах</h2>
-        </div>
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-1.jpg">
-                        <h5><a href="#">Fresh Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-2.jpg">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-3.jpg">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-4.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-5.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Trend Section End -->
-
-<!-- Bestsellers Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="section-title">
-            <h2>Бестселлеры</h2>
-        </div>
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-1.jpg">
-                        <h5><a href="#">Fresh Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-2.jpg">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-3.jpg">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-4.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="static/iherbItems/img/categories/cat-5.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Trend Section End -->
 
 <!-- New Items Section Begin -->
 <section class="categories">
